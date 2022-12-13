@@ -51,7 +51,7 @@ jobs:
                     "locked": "true"
             }
           relations: |
-          {
+            {
               "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
-          }
+            }
 
