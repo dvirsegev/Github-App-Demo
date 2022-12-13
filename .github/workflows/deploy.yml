@@ -15,15 +15,15 @@ jobs:
       if: ${{ always() }}
       uses: port-labs/port-github-action@v1
       with:
-    clientId: ${{ secrets.CLIENT_ID }}
-    clientSecret: ${{ secrets.CLIENT_SECRET }}
-    operation: UPSERT
-    identifier: example-deployment-${{ github.run_id }}
-    blueprint: deployment
-    properties: |
-      {
-              "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-              "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
-              "deployBranch": "${{ github.ref_name }}",
-      }
+        clientId: ${{ secrets.CLIENT_ID }}
+        clientSecret: ${{ secrets.CLIENT_SECRET }}
+        operation: UPSERT
+        identifier: example-deployment-${{ github.run_id }}
+        blueprint: deployment
+        properties: |
+          {
+                  "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                  "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
+                  "deployBranch": "${{ github.ref_name }}",
+          }
 
