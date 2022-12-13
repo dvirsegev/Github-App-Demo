@@ -2,28 +2,55 @@ name: Post Run Actions
 
 on:
   workflow_dispatch:
-  
+  inputs:
+    RUNTIME:
+      required: true
+      type: string
+    SERVICE_NAME:
+      required: true
+      type: string
+
 jobs:
   post-run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        persist-credentials: true
-        fetch-depth: 2
-    - name: "Report deployment to Port 🚢"
-      if: ${{ always() }}
-      uses: port-labs/port-github-action@v1
-      with:
-        clientId: ${{ secrets.CLIENT_ID }}
-        clientSecret: ${{ secrets.CLIENT_SECRET }}
-        operation: UPSERT
-        identifier: example-deployment-${{ github.run_id }}
-        blueprint: Deployment
-        properties: |
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          fetch-depth: 2
+      - name: "Report deployment to Port 🚢"
+        if: ${{ always() }}
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          operation: UPSERT
+          identifier: example-deployment-${{ github.run_id }}
+          blueprint: Deployment
+          properties: |
+            {
+                    "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                    "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
+                    "deployBranch": "${{ github.ref_name }}"
+            }
+      - name: "Report deployment service to Port 🚢"
+        if: ${{ always() }}
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          operation: UPSERT
+          identifier: "${{ inputs.SERVICE_NAME }}-${{ inputs.RUNTIME }}"
+          blueprint: DeploymentService
+          properties: |
+            {
+                    "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                    "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
+                    "deployBranch": "${{ github.ref_name }}"
+            }
+          relations: |
           {
-                  "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-                  "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
-                  "deployBranch": "${{ github.ref_name }}"
+              "of": "${{ inputs.SERVICE_NAME }}",
+              "at": "${{ inputs.RUNTIME }}"
           }
 
