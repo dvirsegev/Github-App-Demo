@@ -31,8 +31,8 @@ jobs:
       # Run python scanner script with necessary env vars
       - name: Run scanner script
         env:
-          PORT_CLIENT_ID: ${{ secrets.PORT_CLIENT_ID }}
-          PORT_CLIENT_SECRET: ${{ secrets.PORT_CLIENT_SECRET }}
+          PORT_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          PORT_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           MICROSERVICE_PATH: "apps/"
         run: |
           python .github/scripts/scan-yarn-lock.py
