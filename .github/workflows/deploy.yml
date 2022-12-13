@@ -2,7 +2,15 @@ name: Post Run Actions
 
 on:
   workflow_dispatch:
-  
+  workflow_call:
+    inputs:
+      SERVICE_NAME:
+        required: true
+        type: string
+      ENVIRONMENT:
+        required: true
+        type: string
+ 
 jobs:
   post-run:
     runs-on: ubuntu-latest
@@ -24,6 +32,11 @@ jobs:
           {
                   "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
                   "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
-                  "deployBranch": "${{ github.ref_name }}"
+                  "deployBranch": "${{ github.ref_name }}",
+                  "changed_by": "${{ github.actor }}"
+          }
+          relations: |
+          {
+              "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
           }
 
