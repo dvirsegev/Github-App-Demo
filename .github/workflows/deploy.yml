@@ -1,7 +1,6 @@
 name: Post Run Actions
 
 on:
-  workflow_dispatch:
   workflow_call:
     inputs:
       SERVICE_NAME:
