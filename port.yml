@@ -32,3 +32,12 @@
     product: Analytics
     type: Library
     url: https://github.com/dvirsegev/Github-App-Demo
+- identifier: node-ml
+  title: Node ML
+  blueprint: microservice
+  properties:
+    on-call: develoepr@getport.io
+    language: Node
+    product: Analytics
+    type: Library
+    url: https://github.com/dvirsegev/Github-App-Demo
