@@ -1,15 +1,15 @@
 name: Post Run Actions
 
 on:
-  workflow_dispatch:
-  inputs:
-    RUNTIME:
-      required: true
-      type: string
-    SERVICE_NAME:
-      required: true
-      type: string
-
+  workflow_call:
+    inputs:
+      SERVICE_NAME:
+        required: true
+        type: string
+      ENVIRONMENT:
+        required: true
+        type: string
+ 
 jobs:
   post-run:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
             }
           relations: |
             {
-              "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.RUNTIME }}"
+              "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
             }
       - name: "Report deployment service to Port 🚢"
         if: ${{ always() }}
@@ -52,7 +52,6 @@ jobs:
             }
           relations: |
           {
-              "of": "${{ inputs.SERVICE_NAME }}",
-              "at": "${{ inputs.RUNTIME }}"
+              "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
           }
 

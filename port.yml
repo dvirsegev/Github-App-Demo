@@ -1,11 +1,34 @@
-- identifier: example1
-  title: Example 1
+- identifier: frontend
+  title: Frontend
+  team: Test
   blueprint: microservice
   properties:
-    language: Node
-- identifier: example2
-  title: Example 2
+    on-call: develoepr@getport.io
+    language: React
+    product: SaaS
+    url: https://github.com/dvirsegev/Github-App-Demo
+    monitor-links:
+      - https://grafana.com
+      - https://prometheus.com
+      - https://datadog.com
+- identifier: backend
+  title: Backend
   blueprint: microservice
   properties:
+    on-call: develoepr@getport.io
     language: Node
-  
+    product: Analytics
+    url: https://github.com/dvirsegev/Github-App-Demo
+    monitor-links:
+      - https://grafana.com
+      - https://prometheus.com
+      - https://datadog.com
+- identifier: ml-utils
+  title: ML Utils
+  blueprint: microservice
+  properties:
+    on-call: develoepr@getport.io
+    language: Python
+    product: Analytics
+    type: Library
+    url: https://github.com/dvirsegev/Github-App-Demo
