@@ -9,7 +9,7 @@ on:
       ENVIRONMENT:
         required: true
         type: string
- 
+
 jobs:
   post-run:
     runs-on: ubuntu-latest
@@ -52,6 +52,6 @@ jobs:
             }
           relations: |
             {
-              "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
+              "at": "${{ inputs.ENVIRONMENT }}",
+              "of": "${{ inputs.SERVICE_NAME }}"
             }
-
