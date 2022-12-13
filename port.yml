@@ -15,7 +15,7 @@
   blueprint: microservice
   properties:
     on-call: develoepr@getport.io
-    language: Node
+    language: React
     product: Analytics
     url: https://github.com/dvirsegev/Github-App-Demo
     monitor-links:
