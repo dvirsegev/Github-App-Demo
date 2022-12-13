@@ -7,8 +7,6 @@ on:
       - "main"
     paths:
       - "yarn.lock"
-  workflow_dispatch:
-
   # Trigger workflow when manually called - We keep this in case we want to manually re-sync packages with Port for some reason
   workflow_dispatch:
 
