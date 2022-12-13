@@ -19,7 +19,7 @@ jobs:
         clientSecret: ${{ secrets.CLIENT_SECRET }}
         operation: UPSERT
         identifier: example-deployment-${{ github.run_id }}
-        blueprint: deployment
+        blueprint: Deployment
         properties: |
           {
                   "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
