@@ -10,7 +10,6 @@
       - https://grafana.com
       - https://prometheus.com
       - https://datadog.com
-  
 - identifier: backend
   title: Backend
   blueprint: microservice
