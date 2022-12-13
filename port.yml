@@ -1,0 +1,10 @@
+- identifier: example1
+  title: Example 1
+  blueprint: microservice
+  properties:
+    language: Node
+- identifier: example2
+  title: Example 2
+  blueprint: microservice
+  properties:
+    language: Node
