@@ -1,0 +1,40 @@
+name: Update Packages in Port
+
+on:
+  # Trigger this workflow when yarn.lock file changes on main branch
+  push:
+    branches:
+      - "main"
+    paths:
+      - "yarn.lock"
+  workflow_dispatch:
+
+  # Trigger workflow when manually called - We keep this in case we want to manually re-sync packages with Port for some reason
+  workflow_dispatch:
+
+jobs:
+  update-microservices:
+    name: "Run yarn.lock scanner"
+    runs-on: ubuntu-latest
+    env:
+      RUNTIME: "Production" # main branch indiciates this is a change in production environment.
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+          cache: "pip"
+          cache-dependency-path: ".github/scripts/scan_requirements.txt"
+
+      # Install python requirements
+      - run: |
+          pip install -r .github/scripts/scan_requirements.txt
+
+      # Run python scanner script with necessary env vars
+      - name: Run scanner script
+        env:
+          PORT_CLIENT_ID: ${{ secrets.PORT_CLIENT_ID }}
+          PORT_CLIENT_SECRET: ${{ secrets.PORT_CLIENT_SECRET }}
+          MICROSERVICE_PATH: "apps/"
+        run: |
+          python .github/scripts/scan-yarn-lock.py
