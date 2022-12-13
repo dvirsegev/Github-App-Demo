@@ -22,3 +22,12 @@
       - https://grafana.com
       - https://prometheus.com
       - https://datadog.com
+- identifier: ml-utils
+  title: ML Utils
+  blueprint: microservice
+  properties:
+    on-call: develoepr@getport.io
+    language: Python
+    product: Analytics
+    type: Library
+    url: https://github.com/dvirsegev/Github-App-Demo
