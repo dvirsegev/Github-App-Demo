@@ -24,6 +24,6 @@ jobs:
           {
                   "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
                   "deployBranchUrl": "${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}",
-                  "deployBranch": "${{ github.ref_name }}",
+                  "deployBranch": "${{ github.ref_name }}"
           }
 
