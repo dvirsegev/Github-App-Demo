@@ -1,5 +1,6 @@
 - identifier: frontend
   title: Frontend
+  team: Test
   blueprint: microservice
   properties:
     on-call: develoepr@getport.io
