@@ -44,7 +44,7 @@ jobs:
           clientId: ${{ secrets.CLIENT_ID }}
           clientSecret: ${{ secrets.CLIENT_SECRET }}
           operation: UPSERT
-          identifier: "${{ inputs.SERVICE_NAME }}-${{ inputs.RUNTIME }}"
+          identifier: "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
           blueprint: DeploymentService
           properties: |
             {
