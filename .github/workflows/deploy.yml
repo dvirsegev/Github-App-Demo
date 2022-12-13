@@ -18,6 +18,24 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 2
+      - name: "Report deployment service to Port 🚢"
+        if: ${{ always() }}
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          operation: UPSERT
+          identifier: "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
+          blueprint: DeploymentService
+          properties: |
+            {
+                    "locked": "true"
+            }
+          relations: |
+            {
+              "at": "${{ inputs.ENVIRONMENT }}",
+              "of": "${{ inputs.SERVICE_NAME }}"
+            }
       - name: "Report deployment to Port 🚢"
         if: ${{ always() }}
         uses: port-labs/port-github-action@v1
@@ -36,22 +54,4 @@ jobs:
           relations: |
             {
               "deployedService": "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
-            }
-      - name: "Report deployment service to Port 🚢"
-        if: ${{ always() }}
-        uses: port-labs/port-github-action@v1
-        with:
-          clientId: ${{ secrets.CLIENT_ID }}
-          clientSecret: ${{ secrets.CLIENT_SECRET }}
-          operation: UPSERT
-          identifier: "${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT }}"
-          blueprint: DeploymentService
-          properties: |
-            {
-                    "locked": "true"
-            }
-          relations: |
-            {
-              "at": "${{ inputs.ENVIRONMENT }}",
-              "of": "${{ inputs.SERVICE_NAME }}"
             }
