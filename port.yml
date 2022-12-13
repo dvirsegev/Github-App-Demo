@@ -1,11 +1,13 @@
-- identifier: example1
-  title: Example 1
+- identifier: e_LbB3dI2jxE4UloZO
+  title: user
   blueprint: microservice
   properties:
-    language: Node
-- identifier: example2
-  title: Example 2
-  blueprint: microservice
-  properties:
-    language: Node
+    on-call: develoepr@getport.io
+    language: GO
+    product: SaaS
+    url: https://github.com/dvirsegev/Github-App-Demo
+    monitor-links:
+      - https://grafana.com
+      - https://prometheus.com
+      - https://datadog.com
   
